@@ -1,16 +1,25 @@
 "use client"
 
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import {zodResolver} from '@hookform/resolvers/zod'
 
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage
+} from "@/components/ui/form"
 import { Modal } from "@/components/ui/modal"
 import { useStoreModal } from "@/hooks/use-store-modal"
 import { StoreFormType, storeFormSchema } from "@/validation"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 export const StoreModal = () => {
+  const [isLoading, setIsLoading] = useState(false)
     const storeModal = useStoreModal()
 
     const form = useForm<StoreFormType>({
@@ -21,7 +30,7 @@ export const StoreModal = () => {
     })
 
     const onSubmit = async (values: StoreFormType) => {
-console.log('%cstore-modal.tsx line:24 values', 'color: #007acc;', values);
+      setIsLoading(true)
     }
 
   return (
@@ -40,15 +49,15 @@ console.log('%cstore-modal.tsx line:24 values', 'color: #007acc;', values);
               <FormItem>
                 <FormLabel>Name:</FormLabel>
                 <FormControl>
-                  <Input placeholder="E-commerce" {...field} />
+                  <Input disabled={isLoading} placeholder="E-commerce" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div className="flex justify-end space-x-2">
-            <Button variant="outline">Cancel</Button>
-            <Button type="submit">Submit</Button>
+          <div className="flex justify-end space-x-2 w-full">
+            <Button disabled={isLoading} variant="outline" onClick={storeModal.onClose}>Cancel</Button>
+            <Button disabled={isLoading} type="submit">Continue</Button>
           </div>
         </form>
       </Form>
