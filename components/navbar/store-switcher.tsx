@@ -95,7 +95,7 @@ export const StoreSwitcher: FC<StoreSwitcherProps> = ({
                                     storeModal.onOpen()
                                 }}
                             >
-                                <PlusCircle className="h-5 w-5 mr-2" />
+                                <PlusCircle className="h-5 w-5 mr-2 opacity-50" />
                                 Create Store
                             </CommandItem>
                         </CommandGroup>
