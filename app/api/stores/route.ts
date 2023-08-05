@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
         if (!name) {
             return new NextResponse('Name is required', {status: 400})
         }
-
+        
         const store = await prismadb.store.create({
             data: {
                 name,
