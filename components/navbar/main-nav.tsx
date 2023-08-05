@@ -13,10 +13,16 @@ export const MainNav = ({
 
     const routes = [
         {
+            href: `/${params.storeId}`,
+            label: 'Overview',
+            active: pathName === `/${params.storeId}`
+        },
+        {
             href: `/${params.storeId}/settings`,
             label: 'Settings',
             active: pathName === `/${params.storeId}/settings`
-        }
+        },
+
     ]
   return (
     <nav {...props} className={cn('flex, items-center space-x-3 lg:space-x-6', className)}>
