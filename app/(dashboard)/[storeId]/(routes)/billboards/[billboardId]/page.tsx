@@ -8,12 +8,13 @@ interface BillboardPageProps {
     }
 }
 
-export default async function BillboardsPage({params}: BillboardPageProps) {
+export default async function BillboardPage({params}: BillboardPageProps) {
     const billboard = await prismadb.billboard.findUnique({
         where: {
             id: params.billboardId
         }
     })
+
     return (
         <div className="flex-col max-w-[1320px] mx-auto">
             <div className="flex-1 p-8 pt-6 space-y-4">
