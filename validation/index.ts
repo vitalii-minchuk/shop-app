@@ -19,3 +19,10 @@ export const billboardFormSchema = Zod.object({
 
 export type BillboardFormType = Zod.infer<typeof billboardFormSchema>
 
+export const categoryFormSchema = Zod.object({
+    name: Zod.string().min(1),
+    billboardId: Zod.string()
+})
+
+export type CategoryFormType = Zod.infer<typeof categoryFormSchema>
+
