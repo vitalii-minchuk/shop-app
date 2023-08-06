@@ -53,12 +53,16 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
         }
     })
 
-    const onSubmit = async (values: BillboardFormType) => {
+    const onSubmit = async (data: BillboardFormType) => {
         try {
             setIsLoading(true)
-            await axios.patch(`/api/stores/${params.storeId}`, values)
+
+            initialData
+                ? await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, data)
+                : await axios.post(`/api/${params.storeId}/billboards`, data)
+            
             router.refresh()
-            toast.success('Store updated')
+            toast.success(toastMessage)
         } catch (error: unknown) {
             error instanceof Error && error.message
               ? toast.error(error.message)
@@ -71,12 +75,11 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
     const onDelete = async () => {
         try {
             setIsLoading(true)
-            await axios.delete(`/api/stores/${params.storeId}`)
+            await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh()
-            router.push('/')
-            toast.success('Store has been deleted')
+            toast.success('Billboard has been deleted')
         } catch (error: unknown) {
-              toast.error('Make sure you removed all products and categories first')
+              toast.error('Make sure you removed all categories using this billboard')
         } finally {
             setIsLoading(false)
         }
