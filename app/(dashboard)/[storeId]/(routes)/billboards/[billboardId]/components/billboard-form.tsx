@@ -41,6 +41,8 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
     const toastMessage = initialData ? 'Billboard has been updated' : 'Billboard has been created'
     const action = initialData ? 'Save changes' : 'Create'
 
+    const path = `/${params.storeId}/billboards`
+
     const form = useForm<BillboardFormType>({
         resolver: zodResolver(billboardFormSchema),
         defaultValues: initialData || {
@@ -58,7 +60,7 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
                 : await axios.post(`/api/${params.storeId}/billboards`, data)
             
             router.refresh()
-            router.push(`/${params.storeId}/billboards`)
+            router.push(path)
             toast.success(toastMessage)
         } catch (error: unknown) {
             error instanceof Error && error.message
@@ -74,6 +76,7 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
             setIsLoading(true)
             await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`)
             router.refresh()
+            router.push(path)
             toast.success('Billboard has been deleted')
         } catch (error: unknown) {
               toast.error('Make sure you removed all categories using this billboard')
@@ -148,7 +151,6 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
                 <Button disabled={isLoading} type="submit">{action}</Button>
             </form>
         </Form>
-        <Separator />
     </>
   )
 }
