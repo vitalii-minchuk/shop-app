@@ -13,12 +13,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
+import { SizeColumn } from "./columns"
 import { Button } from "@/components/ui/button"
 import { AlertModal } from "@/components/modals/alert-modal"
-import { CategoryColumn } from "./columns"
 
 interface CellActionsProps {
-  data: CategoryColumn
+  data: SizeColumn
 }
 
 export const CellActions: FC<CellActionsProps> = ({data}) => {
@@ -28,7 +28,7 @@ export const CellActions: FC<CellActionsProps> = ({data}) => {
   const router = useRouter()
   const params = useParams()
 
-  const path = `/${params.storeId}/categories/${data.id}`
+  const path = `/${params.storeId}/sizes/${data.id}`
 
   const onCopy = () => {
     navigator.clipboard.writeText(data.id)
@@ -37,15 +37,15 @@ export const CellActions: FC<CellActionsProps> = ({data}) => {
 
   const onDelete = async () => {
     try {
-      setIsLoading(true)
-      await axios.delete(`/api/${params.storeId}/categories/${data.id}`)
-      setOpen(false)
-      router.refresh()
-      toast.success('Category has been deleted')
+        setIsLoading(true)
+        await axios.delete(`/api/${params.storeId}/sizes/${data.id}`)
+        setOpen(false)
+        router.refresh()
+        toast.success('Size has been deleted')
     } catch (error: unknown) {
-      toast.error('Make sure you removed all products using this category')
+          toast.error('Make sure you removed all categories using this billboard')
     } finally {
-      setIsLoading(false)
+        setIsLoading(false)
     }
   }
 

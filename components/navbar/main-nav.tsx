@@ -32,7 +32,11 @@ export const MainNav = ({
             label: 'Categories',
             active: pathName === `/${params.storeId}/categories`
         },
-
+        {
+            href: `/${params.storeId}/sizes`,
+            label: 'Sizes',
+            active: pathName === `/${params.storeId}/sizes`
+        },
     ]
   return (
     <nav {...props} className={cn('flex, items-center space-x-3 lg:space-x-6', className)}>
