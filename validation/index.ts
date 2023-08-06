@@ -33,3 +33,10 @@ export const sizeFormSchema = Zod.object({
 
 export type SizeFormType = Zod.infer<typeof sizeFormSchema>
 
+export const colorFormSchema = Zod.object({
+    name: Zod.string().min(1),
+    value: Zod.string().min(1)
+})
+
+export type ColorFormType = Zod.infer<typeof colorFormSchema>
+

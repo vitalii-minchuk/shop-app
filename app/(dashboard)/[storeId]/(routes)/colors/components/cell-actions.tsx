@@ -13,12 +13,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { SizeColumn } from "./columns"
+import { ColorColumn } from "./columns"
 import { Button } from "@/components/ui/button"
 import { AlertModal } from "@/components/modals/alert-modal"
 
 interface CellActionsProps {
-  data: SizeColumn
+  data: ColorColumn
 }
 
 export const CellActions: FC<CellActionsProps> = ({data}) => {
@@ -28,7 +28,7 @@ export const CellActions: FC<CellActionsProps> = ({data}) => {
   const router = useRouter()
   const params = useParams()
 
-  const path = `/${params.storeId}/sizes/${data.id}`
+  const path = `/${params.storeId}/colors/${data.id}`
 
   const onCopy = () => {
     navigator.clipboard.writeText(data.id)
@@ -38,12 +38,12 @@ export const CellActions: FC<CellActionsProps> = ({data}) => {
   const onDelete = async () => {
     try {
       setIsLoading(true)
-      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`)
+      await axios.delete(`/api/${params.storeId}/colors/${data.id}`)
       setOpen(false)
       router.refresh()
-      toast.success('Size has been deleted')
+      toast.success('Color has been deleted')
     } catch (error: unknown) {
-      toast.error('Make sure you removed all products using this size')
+      toast.error('Make sure you removed all products using this color')
     } finally {
       setIsLoading(false)
     }

@@ -37,6 +37,11 @@ export const MainNav = ({
             label: 'Sizes',
             active: pathName === `/${params.storeId}/sizes`
         },
+        {
+            href: `/${params.storeId}/colors`,
+            label: 'Colors',
+            active: pathName === `/${params.storeId}/colors`
+        },
     ]
   return (
     <nav {...props} className={cn('flex, items-center space-x-3 lg:space-x-6', className)}>
