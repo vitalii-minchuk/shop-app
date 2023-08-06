@@ -12,3 +12,10 @@ export const settingsFormSchema = Zod.object({
 
 export type SettingsFormType = Zod.infer<typeof settingsFormSchema>
 
+export const billboardFormSchema = Zod.object({
+    label: Zod.string().min(1),
+    imageUrl: Zod.string().min(1),
+})
+
+export type BillboardFormType = Zod.infer<typeof billboardFormSchema>
+
