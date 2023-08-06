@@ -23,8 +23,6 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { AlertModal } from "@/components/modals/alert-modal"
-import { ApiAlert } from "@/components/ui/api-alert"
-import { useOrigin } from "@/hooks/use-origin"
 import { ImageUpload } from "@/components/ui/image-upload"
 
 interface BillboardFormProps {
@@ -34,8 +32,6 @@ interface BillboardFormProps {
 export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
     const [open, setOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    
-    const appOrigin = useOrigin()
 
     const params = useParams()
     const router = useRouter()
@@ -62,6 +58,7 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
                 : await axios.post(`/api/${params.storeId}/billboards`, data)
             
             router.refresh()
+            router.push(`/${params.storeId}/billboards`)
             toast.success(toastMessage)
         } catch (error: unknown) {
             error instanceof Error && error.message
@@ -152,11 +149,6 @@ export const BillboardForm: FC<BillboardFormProps> = ({initialData}) => {
             </form>
         </Form>
         <Separator />
-        <ApiAlert
-            title="NEXT_PUBLIC_API_URL"
-            description={`${appOrigin}/api/${params.storeId}`}
-            variant="public"
-        />
     </>
   )
 }

@@ -6,8 +6,14 @@ import { Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Heading } from "@/components/ui/heading"
 import { Separator } from "@/components/ui/separator"
+import { FC } from "react"
+import { BillboardColumn } from "./columns"
 
-export const BillboardClient = () => {
+interface BillboardClientProps {
+  data: BillboardColumn[]
+}
+
+export const BillboardClient: FC<BillboardClientProps> = ({data}) => {
   const router = useRouter()
   const params = useParams()
 
@@ -15,7 +21,7 @@ export const BillboardClient = () => {
     <>
       <div className="flex justify-between items-center">
         <Heading
-          title="Billboards (0)"
+          title={`Billboards (${data.length})`}
           description="Manage billboards for your store"
         />
         <Button onClick={() => router.push(`/${params.storeId}/billboards/new`)}>
